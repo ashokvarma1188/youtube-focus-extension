@@ -20,8 +20,7 @@ A Chrome extension that helps students stay focused while studying on YouTube.
 ## How It Works
 This extension removes distracting YouTube elements using DOM manipulation and provides a focus timer for productivity.
 
-## Screenshots
-(Add screenshots here later)
+
 
 ## Author
 Ashok Varma
