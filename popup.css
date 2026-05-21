@@ -1,0 +1,20 @@
+body {
+    width: 200px;
+    padding: 20px;
+    text-align: center;
+    font-family: Arial;
+}
+
+h2 {
+    font-size: 18px;
+    border-style: dotted;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
