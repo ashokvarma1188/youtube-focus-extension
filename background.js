@@ -1,4 +1,4 @@
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+hrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === "TIMER_DONE") {
         // Show browser notification
         chrome.notifications.create({
