@@ -6,7 +6,7 @@ A Chrome Extension built for students to stay **focused and distraction-free** w
 
 ## 📸 Preview
 
-![YouTube Focus Mode Preview](preview.png)
+![YouTube Focus Mode Preview](Screenshot%202026-05-24%20222409.png)
 
 ---
 
