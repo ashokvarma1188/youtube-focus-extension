@@ -1,26 +1,44 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title >Focus Mode </title>
+    <meta charset="UTF-8">
+    <title>Focus Mode</title>
     <link rel="stylesheet" href="popup.css">
 </head>
-
 <body>
 
-    <h2 >Focus Mode</h2>
+    <h2>YouTube Focus</h2>
 
-    <button id="toggleBtn"> Enable Focus </button>
+    <!-- STATUS -->
+    <div class="status-box">
+        <span id="statusDot" class="dot green"></span>
+        <span id="statusText">Focus is ON</span>
+    </div>
 
-  
+    <!-- FOCUS TOGGLE -->
+    <button id="toggleBtn">Disable Focus</button>
 
-     <h1 id="timer">25:00</h1>
-     <button id="startBtn">Start</button>
-     <button id="stopBtn">Stop</button>
-     <button id="resetBtn">Reset</button>
+    <!-- DARK MODE -->
+    <button id="darkBtn">Dark Mode</button>
+
+    <!-- TIMER -->
+    <div class="timer-section">
+        <h3>Pomodoro Timer</h3>
+        <h1 id="timer">25:00</h1>
+        <div class="timer-btns">
+            <button id="startBtn">Start</button>
+            <button id="stopBtn">Stop</button>
+            <button id="resetBtn">Reset</button>
+        </div>
+    </div>
+
+    <!-- SESSION STATS -->
+    <div class="stats-box">
+        <p><b>Today's Focus</b></p>
+        <p>Sessions: <b><span id="sessionCount">0</span></b></p>
+        <p>Total Time: <b><span id="totalTime">0</span> mins</b></p>
+    </div>
 
     <script src="popup.js"></script>
-
 </body>
-
 </html>

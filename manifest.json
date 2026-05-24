@@ -3,7 +3,11 @@
   "name": "YouTube Focus Mode",
   "version": "1.0",
 
-  "permissions": ["storage"],
+  "permissions": ["storage", "tabs", "notifications"],
+
+  "background": {
+    "service_worker": "background.js"
+  },
 
   "action": {
     "default_popup": "popup.html"

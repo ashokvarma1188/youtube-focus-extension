@@ -1,20 +1,113 @@
 body {
-    width: 200px;
-    padding: 20px;
+    width: 220px;
+    padding: 16px;
     text-align: center;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.dark {
+    background-color: #1a1a2e;
+    color: #e6edf3;
 }
 
 h2 {
-    font-size: 18px;
-    border-style: dotted;
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 
+h3 {
+    font-size: 13px;
+    margin: 6px 0;
+}
+
+/* STATUS DOT */
+.status-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot.green { background-color: #3fb950; }
+.dot.red   { background-color: #f85149; }
+
+/* BUTTONS */
 button {
-    padding: 10px 20px;
+    padding: 8px 16px;
+    margin: 4px;
     border: none;
-    background-color: black;
+    background-color: #1a73e8;
     color: white;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 12px;
+    width: 90%;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+#darkBtn {
+    background-color: #444;
+    width: 90%;
+}
+
+/* TIMER */
+.timer-section {
+    margin: 10px 0;
+    border-top: 1px solid #ddd;
+    padding-top: 8px;
+}
+
+body.dark .timer-section {
+    border-top: 1px solid #333;
+}
+
+#timer {
+    font-size: 28px;
+    margin: 6px 0;
+    letter-spacing: 2px;
+}
+
+.timer-btns {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+}
+
+.timer-btns button {
+    width: auto;
+    padding: 6px 12px;
+    font-size: 11px;
+}
+
+/* STATS */
+.stats-box {
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+    padding-top: 8px;
+    font-size: 12px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+body.dark .stats-box {
+    border-top: 1px solid #333;
+}
+
+.stats-box p {
+    margin: 3px 0;
 }
