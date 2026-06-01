@@ -1,6 +1,6 @@
 # 🎯 YouTube Focus Mode — Chrome Extension
 
-A Chrome Extension built for students to stay **focused and distraction-free** while studying on YouTube.
+A Chrome Extension built for students to stay **focused and distraction-free** while studying on YouTube
 
 ---
 
