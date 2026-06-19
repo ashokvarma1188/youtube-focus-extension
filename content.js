@@ -325,6 +325,7 @@ if (typeof chrome === "undefined" || !chrome.storage) {
         }
     });
 
+
     // Debounce so MutationObserver firing rapidly (YouTube mutates the
     // DOM a LOT) doesn't run runFocusMode hundreds of times per second.
     let debounceTimer = null;
@@ -343,4 +344,7 @@ if (typeof chrome === "undefined" || !chrome.storage) {
 
     runFocusMode();
     setupClickBlocker();
+
+
+    setInterval(hideDistractions, 1000);
 }

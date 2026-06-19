@@ -156,6 +156,7 @@ chrome.storage.onChanged.addListener((changes) => {
 });
 
 
+
 // ---- KEYWORDS (chip style) ----
 const keywordInput = document.getElementById("keywordInput");
 const addKeywordBtn = document.getElementById("addKeywordBtn");
@@ -224,3 +225,10 @@ function loadKeywords() {
 }
 
 loadKeywords();
+
+resetBtn.addEventListener("click", () => {
+    clearInterval(interval);
+    timeLeft = 1 * 60; // change to 25 * 60 after testing
+    timer.innerText = "01:00";
+});
+
