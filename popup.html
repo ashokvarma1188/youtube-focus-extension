@@ -21,6 +21,22 @@
     <!-- DARK MODE -->
     <button id="darkBtn">Dark Mode</button>
 
+
+    <h3>Block Keyword</h3>
+    <input
+     type="text" id="keywordInput" placeholder="Enter keyword">
+     <button id="addKeywordBtn">Add Keyword</button>
+
+
+
+     <div class="keyword-list-section">
+         <h3 id="keywordTitle">Saved Keywords (0)</h3>
+         <ul id="keywordList"></ul>
+     </div>
+
+
+
+
     <!-- TIMER -->
     <div class="timer-section">
         <h3>Pomodoro Timer</h3>
@@ -37,6 +53,7 @@
         <p><b>Today's Focus</b></p>
         <p>Sessions: <b><span id="sessionCount">0</span></b></p>
         <p>Total Time: <b><span id="totalTime">0</span> mins</b></p>
+        <p>Focus Score: <b><span id="focusScore">0</span>%</b></p>
     </div>
 
     <script src="popup.js"></script>

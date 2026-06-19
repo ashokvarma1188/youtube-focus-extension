@@ -111,3 +111,86 @@ body.dark .stats-box {
 .stats-box p {
     margin: 3px 0;
 }
+
+/* ===== KEYWORD CHIPS ===== */
+.keyword-list-section {
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+    padding-top: 8px;
+    text-align: left;
+}
+
+body.dark .keyword-list-section {
+    border-top: 1px solid #333;
+}
+
+#keywordTitle {
+    text-align: center;
+}
+
+/* the ul becomes a flex-wrap chip container instead of a vertical list */
+#keywordList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    max-height: 110px;
+    overflow-y: auto;
+}
+
+/* each li is now a small pill, not a full-width row */
+#keywordList li {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    background: #e8eefc;
+    color: #1a1a1a;
+    margin: 0;
+    padding: 5px 6px 5px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    max-width: 100%;
+}
+
+body.dark #keywordList li {
+    background: #2a3a5c;
+    color: #e6edf3;
+}
+
+.keyword-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 130px;
+}
+
+.deleteBtn {
+    flex-shrink: 0;
+    min-width: 18px;
+    height: 18px;
+    line-height: 18px;
+    padding: 0;
+    margin: 0;
+    width: auto;
+
+    background: transparent;
+    color: #d63333;
+    font-size: 12px;
+
+    border: none;
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+body.dark .deleteBtn {
+    color: #ff8a8a;
+}
+
+.deleteBtn:hover {
+    opacity: 0.7;
+}

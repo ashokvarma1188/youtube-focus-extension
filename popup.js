@@ -87,32 +87,61 @@ const stopBtn = document.getElementById("stopBtn");
 const resetBtn = document.getElementById("resetBtn");
 const sessionCount = document.getElementById("sessionCount");
 const totalTime = document.getElementById("totalTime");
+const focusScore = document.getElementById("focusScore");
 
-let timeLeft = 0.5*60; // change to 25 * 60 after testing
-let interval;
-
+// Load session stats
 chrome.storage.local.get(["sessions", "totalMins"], (data) => {
-    sessionCount.innerText = data.sessions || 0;
-    totalTime.innerText = data.totalMins || 0;
+
+    const sessions = data.sessions || 0;
+    const mins = data.totalMins || 0;
+
+    sessionCount.innerText = sessions;
+    totalTime.innerText = mins;
+
+    const score = Math.min(100, sessions * 10);
+
+    focusScore.innerText = score;
+
 });
 
+// LOAD CURRENT TIMER STATE from background
+function updateTimerDisplay() {
+    chrome.storage.local.get(["timerLeft", "timerRunning"], (data) => {
+        const t = data.timerLeft !== undefined ? data.timerLeft : 0.5 * 60;
+        const mins = Math.floor(t / 60);
+        const secs = t % 60;
+        timer.innerText = `${mins}:${secs < 10 ? "0" + secs : secs}`;
+    });
+}
+
+// Update display every second when popup is open
+updateTimerDisplay();
+setInterval(updateTimerDisplay, 1000);
+
+// START
 startBtn.addEventListener("click", () => {
-    clearInterval(interval);
-    interval = setInterval(() => {
-        let minutes = Math.floor(timeLeft / 60);
-        let seconds = timeLeft % 60;
-        if (seconds < 10) seconds = "0" + seconds;
-        timer.innerText = `${minutes}:${seconds}`;
-        timeLeft--;
+    chrome.storage.local.get("timerLeft", (data) => {
+        const t = data.timerLeft !== undefined ? data.timerLeft : 0.5 * 60;
+        chrome.runtime.sendMessage({ type: "START_TIMER", timeLeft: t });
+    });
+});
 
-        if (timeLeft < 0) {
-            clearInterval(interval);
-            timer.innerText = "Time's Up!";
+// STOP
+stopBtn.addEventListener("click", () => {
+    chrome.runtime.sendMessage({ type: "STOP_TIMER" });
+});
 
-            // Send to background — background handles notification + banner
-            chrome.runtime.sendMessage({ type: "TIMER_DONE" });
+// RESET
+resetBtn.addEventListener("click", () => {
+    chrome.runtime.sendMessage({ type: "RESET_TIMER" });
+    timer.innerText = "00:30";
+});
 
-            chrome.storage.local.get(["sessions", "totalMins"], (data) => {
+// Listen for timer done — update sessions
+chrome.storage.onChanged.addListener((changes) => {
+    if (changes.timerRunning && changes.timerRunning.newValue === false) {
+        chrome.storage.local.get(["sessions", "totalMins", "timerLeft"], (data) => {
+            if (data.timerLeft === 0) {
                 const newSessions = (data.sessions || 0) + 1;
                 const newMins = (data.totalMins || 0) + 25;
                 chrome.storage.local.set({
@@ -121,15 +150,77 @@ startBtn.addEventListener("click", () => {
                 });
                 sessionCount.innerText = newSessions;
                 totalTime.innerText = newMins;
-            });
+            }
+        });
+    }
+});
+
+
+// ---- KEYWORDS (chip style) ----
+const keywordInput = document.getElementById("keywordInput");
+const addKeywordBtn = document.getElementById("addKeywordBtn");
+const keywordList = document.getElementById("keywordList");
+const keywordTitle = document.getElementById("keywordTitle");
+
+addKeywordBtn.addEventListener("click", () => {
+    const keyword = keywordInput.value.trim().toLowerCase();
+
+    if (!keyword) return;
+    chrome.storage.local.get("customKeywords", (data) => {
+        const keywords = data.customKeywords || [];
+
+        // Prevent duplicates
+        if (keywords.includes(keyword)) {
+            alert("Keyword already exists!");
+            return;
         }
-    }, 1000);
+
+        keywords.push(keyword);
+
+        chrome.storage.local.set({
+            customKeywords: keywords
+        });
+        keywordInput.value = "";
+        loadKeywords();
+    });
 });
 
-stopBtn.addEventListener("click", () => { clearInterval(interval); });
+function loadKeywords() {
+    chrome.storage.local.get("customKeywords", (data) => {
 
-resetBtn.addEventListener("click", () => {
-    clearInterval(interval);
-    timeLeft = 1 * 60; // change to 25 * 60 after testing
-    timer.innerText = "01:00";
-});
+        const keywords = data.customKeywords || [];
+        keywordTitle.innerText = `Saved Keywords (${keywords.length})`;
+
+        keywordList.innerHTML = "";
+
+        keywords.forEach((keyword) => {
+            const li = document.createElement("li");
+
+            const textSpan = document.createElement("span");
+            textSpan.className = "keyword-text";
+            textSpan.title = keyword; // full text on hover if truncated
+            textSpan.innerText = keyword;
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "deleteBtn";
+            deleteBtn.innerText = "✕";
+            deleteBtn.setAttribute("aria-label", `Remove ${keyword}`);
+
+            deleteBtn.addEventListener("click", () => {
+                const updatedKeywords = keywords.filter(
+                    (k) => k !== keyword
+                );
+                chrome.storage.local.set({
+                    customKeywords: updatedKeywords
+                });
+                loadKeywords();
+            });
+
+            li.appendChild(textSpan);
+            li.appendChild(deleteBtn);
+            keywordList.appendChild(li);
+        });
+    });
+}
+
+loadKeywords();
