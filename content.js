@@ -2,6 +2,8 @@ if (typeof chrome === "undefined" || !chrome.storage) {
     console.log("Extension reloaded — refresh YouTube tab");
 } else {
 
+
+    //  Distraction Hiding
     const elements = [
         "#comments",
         "#related",
@@ -28,6 +30,7 @@ if (typeof chrome === "undefined" || !chrome.storage) {
             });
         });
     }
+
 
     function showTimerAlert() {
         const banner = document.createElement("div");
@@ -181,8 +184,34 @@ if (typeof chrome === "undefined" || !chrome.storage) {
         });
     }
 
+    // getChannelName() — reads the channel name from a video card
+    function getChannelName(card) {
+        const el =
+            card.querySelector("ytd-channel-name #text") ||
+            card.querySelector("#channel-name #text") ||
+            card.querySelector("ytd-channel-name");
+        return el ? el.innerText.trim().toLowerCase() : "";
+    }
+
+    // filterByChannel() — hides cards whose channel matches your blocked list
+    function filterByChannel(blockedChannels) {
+        if (!blockedChannels || blockedChannels.length === 0) return;
+
+        const allCards = document.querySelectorAll(
+            "ytd-rich-item-renderer, ytd-video-renderer, ytd-compact-video-renderer"
+        );
+
+        allCards.forEach((card) => {
+            const channelName = getChannelName(card);
+            if (!channelName) return;
+
+            const isBlocked = blockedChannels.some((ch) => channelName.includes(ch));
+            if (isBlocked) card.style.display = "none";
+        });
+    }
+
     function runFocusMode() {
-        chrome.storage.local.get(["focusMode", "customKeywords"], (data) => {
+        chrome.storage.local.get(["focusMode", "customKeywords", "blockedChannels"], (data) => {
             if (data.focusMode === false) return;
 
             const regexes = getAllKeywordRegexes(data.customKeywords || []);
@@ -192,6 +221,7 @@ if (typeof chrome === "undefined" || !chrome.storage) {
             filterHomePageVideos(regexes);
             filterSearchResults(regexes);
             filterShortsResults(regexes);
+            filterByChannel(data.blockedChannels || []);
         });
     }
 

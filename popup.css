@@ -129,7 +129,8 @@ body.dark .keyword-list-section {
 }
 
 /* the ul becomes a flex-wrap chip container instead of a vertical list */
-#keywordList {
+#keywordList,
+#channelList {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -141,7 +142,8 @@ body.dark .keyword-list-section {
 }
 
 /* each li is now a small pill, not a full-width row */
-#keywordList li {
+#keywordList li,
+#channelList li {
     list-style: none;
     display: inline-flex;
     align-items: center;
@@ -156,7 +158,8 @@ body.dark .keyword-list-section {
     max-width: 100%;
 }
 
-body.dark #keywordList li {
+body.dark #keywordList li,
+body.dark #channelList li {
     background: #2a3a5c;
     color: #e6edf3;
 }
@@ -193,4 +196,194 @@ body.dark .deleteBtn {
 
 .deleteBtn:hover {
     opacity: 0.7;
+}
+
+
+/* ===== WEEKLY STATS CHART ===== */
+/* This section styles the bar chart added in popup.html #weeklyChart */
+/* The bars themselves are created dynamically by loadWeeklyStats() in popup.js */
+
+.weekly-section {
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+    padding-top: 8px;
+    text-align: center;
+}
+
+body.dark .weekly-section {
+    border-top: 1px solid #333;
+}
+
+/* The chart area — fixed height, bars grow upward from the bottom */
+.chart-container {
+    display: flex;
+    align-items: flex-end;   /* bars sit on the bottom */
+    justify-content: space-between;
+    height: 70px;
+    gap: 4px;
+    padding: 0 4px;
+    margin: 8px 0;
+}
+
+/* Each column holds: mins label → bar → day label (top to bottom) */
+.chart-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end; /* push bar + label to the bottom */
+    flex: 1;
+    height: 100%;
+}
+
+/* "50m" text shown above each bar */
+.bar-mins {
+    font-size: 9px;
+    color: #666;
+    margin-bottom: 2px;
+    height: 12px; /* fixed height so bars align even when label is empty */
+}
+
+body.dark .bar-mins {
+    color: #aaa;
+}
+
+/* The actual colored bar — height is set inline by popup.js as a % */
+.chart-bar {
+    width: 100%;
+    background: #1a73e8;
+    border-radius: 3px 3px 0 0;
+    min-height: 2px; /* show a tiny line even for 0 mins */
+    transition: height 0.3s ease; /* smooth animation when height changes */
+}
+
+body.dark .chart-bar {
+    background: #4a9eff;
+}
+
+/* "Mon", "Tue" etc. below the bar */
+.bar-label {
+    font-size: 10px;
+    color: #666;
+    margin-top: 3px;
+}
+
+body.dark .bar-label {
+    color: #aaa;
+}
+
+/* Streak badge shown below the chart */
+.streak-badge {
+    font-size: 12px;
+    font-weight: bold;
+    color: #e67e22;
+    margin-top: 4px;
+}
+
+
+/* ===== SUBJECT TAGGING ===== */
+
+/* "Studying: [dropdown]" row inside the timer section */
+/* This sits above the Start/Stop/Reset buttons in popup.html */
+.subject-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+/* The dropdown itself */
+#subjectSelect {
+    padding: 4px 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    background: #fff;
+    color: #000;
+    cursor: pointer;
+}
+
+body.dark #subjectSelect {
+    background: #2a2a3e;
+    color: #e6edf3;
+    border-color: #444;
+}
+
+/* Section wrapper below the weekly chart */
+.subject-stats-section {
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+    padding-top: 8px;
+}
+
+body.dark .subject-stats-section {
+    border-top: 1px solid #333;
+}
+
+/* Message shown when no sessions have been done yet */
+.no-subjects {
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+    margin: 4px 0;
+}
+
+/* Each subject row: label | bar track | mins text */
+/* Created dynamically by loadSubjectStats() in popup.js */
+.subject-row-stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 5px 0;
+}
+
+/* Subject name on the left — fixed width so all bars start at the same x */
+.subject-label {
+    font-size: 11px;
+    width: 72px;
+    text-align: right;
+    flex-shrink: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Grey track behind the colored bar */
+.subject-bar-wrap {
+    flex: 1;
+    background: #eee;
+    border-radius: 4px;
+    height: 10px;
+    overflow: hidden;
+}
+
+body.dark .subject-bar-wrap {
+    background: #333;
+}
+
+/* Colored bar — width is set inline by popup.js as a % */
+.subject-bar {
+    height: 100%;
+    background: #1a73e8;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+    min-width: 4px;
+}
+
+body.dark .subject-bar {
+    background: #4a9eff;
+}
+
+/* "75m" text on the right of each bar */
+.subject-mins {
+    font-size: 10px;
+    color: #666;
+    flex-shrink: 0;
+    width: 28px;
+    text-align: left;
+}
+
+body.dark .subject-mins {
+    color: #aaa;
 }

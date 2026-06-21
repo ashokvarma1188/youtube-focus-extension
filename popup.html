@@ -27,20 +27,47 @@
      type="text" id="keywordInput" placeholder="Enter keyword">
      <button id="addKeywordBtn">Add Keyword</button>
 
-
-
      <div class="keyword-list-section">
          <h3 id="keywordTitle">Saved Keywords (0)</h3>
          <ul id="keywordList"></ul>
      </div>
 
+    <!-- CHANNEL BLOCKING -->
+    <h3>Block Channel</h3>
+    <input
+     type="text" id="channelInput" placeholder="Enter channel name">
+     <button id="addChannelBtn">Add Channel</button>
 
+     <div class="keyword-list-section">
+         <h3 id="channelTitle">Blocked Channels (0)</h3>
+         <ul id="channelList"></ul>
+     </div>
 
 
     <!-- TIMER -->
     <div class="timer-section">
         <h3>Pomodoro Timer</h3>
         <h1 id="timer">25:00</h1>
+
+        <!-- SUBJECT TAGGING: student picks what they are studying before starting -->
+        <!-- popup.js reads #subjectSelect when Start is clicked and saves it to storage -->
+        <!-- background.js reads it when timer finishes to add mins to that subject -->
+        <div class="subject-row">
+            <label for="subjectSelect">Studying:</label>
+            <select id="subjectSelect">
+                <option value="Maths">Maths</option>
+                <option value="Physics">Physics</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Biology">Biology</option>
+                <option value="English">English</option>
+                <option value="History">History</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="DSA">DSA</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <!-- END SUBJECT TAGGING -->
+
         <div class="timer-btns">
             <button id="startBtn">Start</button>
             <button id="stopBtn">Stop</button>
@@ -54,6 +81,21 @@
         <p>Sessions: <b><span id="sessionCount">0</span></b></p>
         <p>Total Time: <b><span id="totalTime">0</span> mins</b></p>
         <p>Focus Score: <b><span id="focusScore">0</span>%</b></p>
+    </div>
+
+    <!-- WEEKLY STATS CHART -->
+    <!-- 7 bar columns are created by popup.js inside #weeklyChart -->
+    <div class="weekly-section">
+        <h3>Weekly Study Chart</h3>
+        <div class="chart-container" id="weeklyChart"></div>
+        <div class="streak-badge" id="streakBadge">🔥 Streak: 0 days</div>
+    </div>
+
+    <!-- SUBJECT STATS -->
+    <!-- loadSubjectStats() in popup.js fills #subjectStats with one bar row per subject -->
+    <div class="subject-stats-section">
+        <h3>📚 Subject Stats</h3>
+        <div id="subjectStats"></div>
     </div>
 
     <script src="popup.js"></script>

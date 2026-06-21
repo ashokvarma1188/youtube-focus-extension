@@ -2,6 +2,7 @@
   "manifest_version": 3,
   "name": "YouTube Focus Mode",
   "version": "1.0",
+  "description": "Block distracting content on YouTube by keyword, channel, and a Pomodoro focus timer.",
 
   "permissions": ["storage", "tabs", "notifications"],
 
