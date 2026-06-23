@@ -9,7 +9,6 @@
 //     "ytd-browse[page-subtype='home'] #contents"
 // ];
 
-
 // function hideDistractions() {
 //     chrome.storage.local.get("focusMode", (data) => {
 //         if (data.focusMode === false) {
