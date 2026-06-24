@@ -2,7 +2,6 @@ if (typeof chrome === "undefined" || !chrome.storage) {
     console.log("Extension reloaded — refresh YouTube tab");
 } else {
 
-
     //  Distraction Hiding
     const elements = [
         "#comments",
