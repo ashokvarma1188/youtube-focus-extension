@@ -8,6 +8,7 @@ body {
     transition: background 0.3s, color 0.3s;
 }
 
+
 body.dark {
     background-color: #1a1a2e;
     color: #e6edf3;
