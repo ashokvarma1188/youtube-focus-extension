@@ -3,6 +3,7 @@ let timerInterval = null;
 let timeLeft = 0.5 * 60;
 let isRunning = false;
 
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
     if (message.type === "START_TIMER") {
