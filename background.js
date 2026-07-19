@@ -1,8 +1,12 @@
-// Pomodoro Timer 
+// Pomodoro Timer
+// Pomodoro timer (runs in background)	background.js
+// Subject tagging + stats	popup.js + background.js
+// background.js → reads storage → saves after timer ends
+
+// ________________________________________________________
 let timerInterval = null;
 let timeLeft = 0.5 * 60;
 let isRunning = false;
-
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 

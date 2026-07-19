@@ -1,3 +1,9 @@
+//runs on YouTube page
+// Keyword blocking (30+ built-in)	content.js
+// Hide comments, sidebar, shorts shelf	content.js
+// Click blocker overlay	content.js
+// content.js → reads storage → hides videos on YouTube
+// __________________________________________________________
 if (typeof chrome === "undefined" || !chrome.storage) {
     console.log("Extension reloaded — refresh YouTube tab");
 } else {
@@ -74,7 +80,6 @@ if (typeof chrome === "undefined" || !chrome.storage) {
         "meet bros", "sunny leone",
         "dandelions", "magadheera"
     ];
-
     // Build one shared regex list once per run instead of re-creating
     // a new RegExp for every keyword on every single card (faster).
     //

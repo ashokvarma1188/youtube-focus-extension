@@ -1,3 +1,13 @@
+//Focus ON/OFF toggle	popup.js
+// Dark mode	popup.js + css
+// Custom keyword add/delete	popup.js
+// Channel blocking	popup.js + content.js
+// Weekly study bar chart (7 days)	popup.js + css
+// Subject tagging + stats	popup.js + background.js
+// popup.js → saves data → Chrome Storage
+// popup.js → reads storage → shows charts + stats
+
+// ______________________________________________________________________
 // const elements = [
 //     "#comments",
 //     "#related",
@@ -42,7 +52,7 @@ let enabled = true;
 
 function updateStatus(isEnabled) {
     if (isEnabled) {
-        statusDot.className = "dot green";
+        statusDot.cforlassName = "dot green";
         statusText.innerText = "Focus is ON";
         button.innerText = "Disable Focus";
     } else {
@@ -78,11 +88,16 @@ chrome.storage.local.get("darkMode", (data) => {
 
 darkBtn.addEventListener("click", () => {
     document.body.classList.toggle("dark");
-   // ________________________________________________
+    
     const isDark = document.body.classList.contains("dark");
     chrome.storage.local.set({ darkMode: isDark });
     darkBtn.innerText = isDark ? "Light Mode" : "Dark Mode";
 });
+// document -> The whole webpage
+// document.body -> Give me the body tag
+// chrome.storage.local ->Chrome Notebook 📒 mea swe can save data nd when we refreh data will store
+// chrome.storage.local.set() ->SAVE in notebook
+// chrome.storage.local.get() ->READ from notebook
 
 // ---- TIMER ----
 const timer = document.getElementById("timer");
