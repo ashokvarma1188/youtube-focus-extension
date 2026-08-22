@@ -16,9 +16,20 @@
 
 <br/>
 
-![Preview Screenshot](Screenshot%202026-05-24%20222409.png)
-
 </div>
+
+## 📸 Screenshots
+
+<table>
+  <tr>
+    <td width="50%"><img src="screenshots/main-popup.png" alt="Main popup — Focus toggle, keyword & channel blocking" width="100%"/><p align="center"><b>Focus Toggle + Keyword/Channel Blocking</b></p></td>
+    <td width="50%"><img src="screenshots/keywords-added.png" alt="Custom keywords added as chips" width="100%"/><p align="center"><b>Custom Keyword Chips</b></p></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="screenshots/weekly-chart.png" alt="Weekly study chart and subject stats" width="100%"/><p align="center"><b>Weekly Study Chart + Subject Stats</b></p></td>
+    <td width="50%"><img src="screenshots/streak-stats.png" alt="Streak counter and daily progress" width="100%"/><p align="center"><b>🔥 Streak Counter</b></p></td>
+  </tr>
+</table>
 
 ---
 
